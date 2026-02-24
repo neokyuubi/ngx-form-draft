@@ -1,0 +1,46 @@
+{
+  "name": "ngx-form-draft",
+  "version": "1.0.0",
+  "description": "Auto-save and restore Angular form drafts with zero dependencies",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Karam",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karam94/ngx-form-draft.git"
+  },
+  "bugs": {
+    "url": "https://github.com/karam94/ngx-form-draft/issues"
+  },
+  "homepage": "https://github.com/karam94/ngx-form-draft#readme",
+  "peerDependencies": {
+    "@angular/core": ">=12.0.0",
+    "@angular/common": ">=12.0.0",
+    "@angular/forms": ">=12.0.0",
+    "@angular/animations": ">=12.0.0",
+    "rxjs": ">=6.0.0",
+    "tslib": "^2.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "angular",
+    "forms",
+    "draft",
+    "autosave",
+    "reactive-forms",
+    "template-driven-forms",
+    "form-array",
+    "localstorage",
+    "angular-directive"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
+}
