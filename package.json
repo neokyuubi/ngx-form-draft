@@ -8,12 +8,12 @@
   "author": "Karam",
   "repository": {
     "type": "git",
-    "url": "https://github.com/karam94/ngx-form-draft.git"
+    "url": "https://github.com/neokyuubi/ngx-form-draft.git"
   },
   "bugs": {
-    "url": "https://github.com/karam94/ngx-form-draft/issues"
+    "url": "https://github.com/neokyuubi/ngx-form-draft/issues"
   },
-  "homepage": "https://github.com/karam94/ngx-form-draft#readme",
+  "homepage": "https://github.com/neokyuubi/ngx-form-draft#readme",
   "peerDependencies": {
     "@angular/core": ">=12.0.0",
     "@angular/common": ">=12.0.0",
