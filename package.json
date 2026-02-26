@@ -1,6 +1,6 @@
 {
   "name": "ngx-form-draft",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Auto-save and restore Angular form drafts with zero dependencies",
   "author": "Neokyuubi",
   "publishConfig": {
@@ -52,10 +52,5 @@
     "localstorage",
     "angular-directive"
   ],
-  "license": "MIT",
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
-  ]
+  "license": "MIT"
 }
