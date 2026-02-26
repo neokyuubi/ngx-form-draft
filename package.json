@@ -1,6 +1,6 @@
 {
   "name": "ngx-form-draft",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Auto-save and restore Angular form drafts with zero dependencies",
   "main": "dist/bundles/ngx-form-draft.umd.js",
   "module": "dist/fesm2015/ngx-form-draft.js",
