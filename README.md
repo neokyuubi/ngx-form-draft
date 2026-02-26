@@ -1,6 +1,6 @@
 # ngx-form-draft
 
-Zero-dependency Angular form draft auto-save and restore. Works with any Angular version ≥12.
+Zero-dependency Angular form draft auto-save and restore. Works with Angular 14+.
 
 ## Features
 
@@ -12,22 +12,15 @@ Zero-dependency Angular form draft auto-save and restore. Works with any Angular
 - 7-day draft expiration
 - Zero external dependencies
 
+## Requirements
+
+- Angular 14 or higher
+- TypeScript 4.7+
+
 ## Installation
 
 ```bash
 npm install ngx-form-draft
-```
-
-### Angular 12 Users
-
-If you're using Angular 12, enable Ivy in your `tsconfig.json`:
-
-```json
-{
-  "angularCompilerOptions": {
-    "enableIvy": true
-  }
-}
 ```
 
 ## Usage
