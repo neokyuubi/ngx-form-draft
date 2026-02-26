@@ -2,13 +2,7 @@
   "name": "ngx-form-draft",
   "version": "2.0.0",
   "description": "Auto-save and restore Angular form drafts with zero dependencies",
-  "main": "dist/bundles/ngx-form-draft.umd.js",
-  "module": "dist/fesm2015/ngx-form-draft.js",
-  "es2015": "dist/fesm2015/ngx-form-draft.js",
-  "esm2015": "dist/esm2015/index.js",
-  "fesm2015": "dist/fesm2015/ngx-form-draft.js",
-  "typings": "dist/index.d.ts",
-  "author": "Karam",
+  "author": "Neokyuubi",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/neokyuubi/ngx-form-draft.git"
