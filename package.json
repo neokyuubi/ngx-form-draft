@@ -2,9 +2,12 @@
   "name": "ngx-form-draft",
   "version": "1.0.2",
   "description": "Auto-save and restore Angular form drafts with zero dependencies",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/bundles/ngx-form-draft.umd.js",
+  "module": "dist/fesm2015/ngx-form-draft.js",
+  "es2015": "dist/fesm2015/ngx-form-draft.js",
+  "esm2015": "dist/esm2015/index.js",
+  "fesm2015": "dist/fesm2015/ngx-form-draft.js",
+  "typings": "dist/index.d.ts",
   "author": "Karam",
   "repository": {
     "type": "git",
@@ -23,10 +26,22 @@
     "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "typescript": "^4.7.0"
+    "@angular/animations": "^14.0.0",
+    "@angular/common": "^14.0.0",
+    "@angular/compiler": "^14.0.0",
+    "@angular/compiler-cli": "^14.0.0",
+    "@angular/core": "^14.0.0",
+    "@angular/forms": "^14.0.0",
+    "@angular/platform-browser": "^14.0.0",
+    "@angular/platform-browser-dynamic": "^14.0.0",
+    "ng-packagr": "^14.0.0",
+    "rxjs": "^7.5.0",
+    "tslib": "^2.3.0",
+    "typescript": "~4.7.0",
+    "zone.js": "~0.11.4"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "ng-packagr -p ng-package.json",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
