@@ -8,7 +8,7 @@
   "author": "Karam",
   "repository": {
     "type": "git",
-    "url": "https://github.com/neokyuubi/ngx-form-draft.git"
+    "url": "git+https://github.com/neokyuubi/ngx-form-draft.git"
   },
   "bugs": {
     "url": "https://github.com/neokyuubi/ngx-form-draft/issues"
