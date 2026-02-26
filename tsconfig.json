@@ -14,6 +14,14 @@
     "emitDecoratorMetadata": true,
     "importHelpers": true
   },
+  "angularCompilerOptions": {
+    "enableIvy": false,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "fullTemplateTypeCheck": false,
+    "strictInjectionParameters": false,
+    "enableResourceInlining": true
+  },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }

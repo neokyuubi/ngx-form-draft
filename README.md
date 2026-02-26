@@ -18,6 +18,18 @@ Zero-dependency Angular form draft auto-save and restore. Works with any Angular
 npm install ngx-form-draft
 ```
 
+### Angular 12 Users
+
+If you're using Angular 12, enable Ivy in your `tsconfig.json`:
+
+```json
+{
+  "angularCompilerOptions": {
+    "enableIvy": true
+  }
+}
+```
+
 ## Usage
 
 ### 1. Import the module
