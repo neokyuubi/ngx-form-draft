@@ -1,5 +1,5 @@
 import {
-  Directive, Input, OnInit, OnDestroy, Optional, ComponentRef,
+  Directive, Input, OnInit, AfterViewInit, OnDestroy, Optional, ComponentRef,
   ViewContainerRef, ChangeDetectorRef, ElementRef, Renderer2,
 } from '@angular/core';
 import { NgForm, FormGroupDirective, AbstractControl, FormArray, FormGroup, FormControl } from '@angular/forms';
@@ -20,7 +20,7 @@ import { FormDraftBannerComponent } from './form-draft-banner.component';
 @Directive({
   selector: '[ngxFormDraft]',
 })
-export class FormDraftDirective implements OnInit, OnDestroy {
+export class FormDraftDirective implements OnInit, AfterViewInit, OnDestroy {
   @Input('ngxFormDraft') formId!: string;
   @Input() draftDebounce = 800;
   @Input() draftExcludeFields: string[] = [];
@@ -50,8 +50,11 @@ export class FormDraftDirective implements OnInit, OnDestroy {
     this.formControl = this.formGroupDir?.form || this.ngForm?.form || null;
     if (!this.formControl || !this.formId) return;
 
-    this.initialValues = JSON.parse(JSON.stringify(this.formControl.value));
-    console.log('[ngx-form-draft] Initial values:', this.initialValues, 'Form type:', this.ngForm ? 'template' : 'reactive');
+    // For reactive forms, capture initial values immediately
+    if (this.formGroupDir) {
+      this.initialValues = JSON.parse(JSON.stringify(this.formControl.value));
+      console.log('[ngx-form-draft] Initial values (reactive):', this.initialValues);
+    }
 
     const draft = this.draftService.load(this.formId);
     if (draft) {
@@ -86,6 +89,16 @@ export class FormDraftDirective implements OnInit, OnDestroy {
         console.log('[ngx-form-draft] Saving draft:', values);
         this.saveDraft(values);
       });
+  }
+
+  ngAfterViewInit(): void {
+    // For template-driven forms, capture initial values after view is initialized
+    if (this.ngForm && this.formControl) {
+      setTimeout(() => {
+        this.initialValues = JSON.parse(JSON.stringify(this.formControl!.value));
+        console.log('[ngx-form-draft] Initial values (template):', this.initialValues);
+      }, 0);
+    }
   }
 
   ngOnDestroy(): void {
