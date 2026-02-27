@@ -53,7 +53,6 @@ export class FormDraftDirective implements OnInit, AfterViewInit, OnDestroy {
     // For reactive forms, capture initial values and restore draft immediately
     if (this.formGroupDir) {
       this.initialValues = JSON.parse(JSON.stringify(this.formControl.value));
-      console.log('[ngx-form-draft] Initial values (reactive):', this.initialValues);
       
       const draft = this.draftService.load(this.formId);
       if (draft) {
@@ -61,20 +60,16 @@ export class FormDraftDirective implements OnInit, AfterViewInit, OnDestroy {
         this.showBanner(draft.savedAt, true);
       }
     }
-    // For template forms, restoration happens in AfterViewInit
 
-    // For template-driven forms, wait until form is actually used
     let hasUserInteraction = false;
     
     this.formControl.valueChanges
       .pipe(
         filter(() => {
           if (this.isRestoring) return false;
-          // For template forms, only save after first real user interaction
           if (this.ngForm && !hasUserInteraction) {
             const currentValues = this.formControl?.value || {};
             const isDifferent = JSON.stringify(currentValues) !== JSON.stringify(this.initialValues);
-            console.log('[ngx-form-draft] Template form check - Current:', currentValues, 'Initial:', this.initialValues, 'Different:', isDifferent);
             if (isDifferent) {
               hasUserInteraction = true;
               return true;
@@ -87,34 +82,25 @@ export class FormDraftDirective implements OnInit, AfterViewInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe((values) => {
-        console.log('[ngx-form-draft] Saving draft:', values);
         this.saveDraft(values);
       });
   }
 
   ngAfterViewInit(): void {
-    // For template-driven forms, restore draft and capture initial values after view is initialized
     if (this.ngForm && this.formControl) {
       const draft = this.draftService.load(this.formId);
       
       if (draft) {
-        // Set isRestoring BEFORE setTimeout to block any emissions
         this.isRestoring = true;
       }
       
       setTimeout(() => {
         if (draft) {
-          // Restore draft
-          console.log('[ngx-form-draft] Restoring template draft:', draft.values);
           this.restoreDraft(draft.values);
           this.showBanner(draft.savedAt, true);
-          // Set initial to empty so any change will save
           this.initialValues = {};
-          console.log('[ngx-form-draft] Initial values (template, with draft): {}');
         } else {
-          // No draft, capture defaults as initial
           this.initialValues = JSON.parse(JSON.stringify(this.formControl!.value));
-          console.log('[ngx-form-draft] Initial values (template, no draft):', this.initialValues);
         }
       }, 0);
     }
