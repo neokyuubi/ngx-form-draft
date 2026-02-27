@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import { NgForm, FormGroupDirective, AbstractControl, FormArray, FormGroup, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { debounceTime, takeUntil, skip } from 'rxjs/operators';
+import { debounceTime, takeUntil, skip, filter } from 'rxjs/operators';
 import { FormDraftService } from './form-draft.service';
 import { FormDraftBannerComponent } from './form-draft-banner.component';
 
@@ -58,13 +58,17 @@ export class FormDraftDirective implements OnInit, OnDestroy {
       this.showBanner(draft.savedAt, true);
     }
 
-    // Skip first emission for template-driven forms (they emit empty values on init)
+    // For template-driven forms, skip initial empty emissions
     const skipFirst = this.ngForm ? 1 : 0;
     
     this.formControl.valueChanges
-      .pipe(skip(skipFirst), debounceTime(this.draftDebounce), takeUntil(this.destroy$))
+      .pipe(
+        skip(skipFirst),
+        filter(() => !this.isRestoring),
+        debounceTime(this.draftDebounce),
+        takeUntil(this.destroy$)
+      )
       .subscribe((values) => {
-        if (this.isRestoring) return;
         this.saveDraft(values);
       });
   }
@@ -78,13 +82,13 @@ export class FormDraftDirective implements OnInit, OnDestroy {
   private saveDraft(values: Record<string, any>): void {
     const filtered = this.filterFields(values);
     
+    // Don't save if empty
     if (this.isAllEmpty(filtered)) {
       return;
     }
 
-    // Only check initial values if they're not empty (reactive forms have proper initial values)
-    const initialIsEmpty = this.isAllEmpty(this.initialValues);
-    if (!initialIsEmpty && this.matchesInitialValues(filtered)) {
+    // Don't save if matches initial values (even if initial is empty)
+    if (this.matchesInitialValues(filtered)) {
       return;
     }
 
