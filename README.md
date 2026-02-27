@@ -38,25 +38,55 @@ export class AppModule {}
 
 ## Usage
 
-### 1. Add directive to your form
+### Reactive Forms
 
 ```html
 <form [formGroup]="myForm" ngxFormDraft="uniqueFormId">
-  <!-- form fields -->
+  <input formControlName="name">
+  <input formControlName="email">
 </form>
 ```
 
-### 2. Scoped drafts (per entity)
+### Template-driven Forms
 
 ```html
+<form #myForm="ngForm" ngxFormDraft="uniqueFormId">
+  <input name="name" [(ngModel)]="model.name">
+  <input name="email" [(ngModel)]="model.email">
+</form>
+```
+
+### Scoped drafts (per entity)
+
+```html
+<!-- Reactive -->
 <form [formGroup]="editForm" [ngxFormDraft]="'edit_' + userId">
+
+<!-- Template-driven -->
+<form #editForm="ngForm" [ngxFormDraft]="'edit_' + userId">
 ```
 
 ## Options
 
+### Reactive Forms
 ```html
 <form 
   [formGroup]="myForm"
+  [ngxFormDraft]="'myForm_' + entityId"
+  [draftDebounce]="1000"
+  [draftExcludeFields]="['password', 'confirmPassword']"
+  [draftShowOnChange]="true"
+  [draftRestoredText]="'Draft restored'"
+  [draftSavedText]="'Draft saved'"
+  [draftSavedLabel]="'saved'"
+  [draftDiscardText]="'Discard'">
+</form>
+```
+
+### Template-driven Forms
+```html
+<form 
+  #myForm="ngForm"
   [ngxFormDraft]="'myForm_' + entityId"
   [draftDebounce]="1000"
   [draftExcludeFields]="['password', 'confirmPassword']"
