@@ -23,7 +23,7 @@ Zero-dependency Angular form draft auto-save and restore. Works with Angular 14+
 npm install ngx-form-draft
 ```
 
-## Usage
+## Setup
 
 ### 1. Import the module
 
@@ -36,7 +36,9 @@ import { NgxFormDraftModule } from 'ngx-form-draft';
 export class AppModule {}
 ```
 
-### 2. Add directive to your form
+## Usage
+
+### 1. Add directive to your form
 
 ```html
 <form [formGroup]="myForm" ngxFormDraft="uniqueFormId">
@@ -44,7 +46,7 @@ export class AppModule {}
 </form>
 ```
 
-### 3. Scoped drafts (per entity)
+### 2. Scoped drafts (per entity)
 
 ```html
 <form [formGroup]="editForm" [ngxFormDraft]="'edit_' + userId">

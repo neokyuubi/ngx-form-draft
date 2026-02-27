@@ -1,10 +1,9 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'ngx-form-draft-banner',
   template: `
-    <div class="form-draft-banner" *ngIf="visible" [@slideDown]>
+    <div class="form-draft-banner" *ngIf="visible">
       <div class="form-draft-banner__icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 8V12L14.5 14.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -33,6 +32,11 @@ import { trigger, transition, style, animate } from '@angular/animations';
       display: flex; align-items: center; gap: 10px; padding: 10px 14px; margin-bottom: 12px;
       border-radius: 8px; background: linear-gradient(135deg, #eef6ff 0%, #f0f4ff 100%);
       border: 1px solid #c5ddf8; box-shadow: 0 2px 8px rgba(18, 138, 214, 0.08);
+      animation: slideDown 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .form-draft-banner__icon {
       display: flex; align-items: center; justify-content: center; width: 32px; height: 32px;
@@ -49,17 +53,6 @@ import { trigger, transition, style, animate } from '@angular/animations';
     .form-draft-banner__btn--discard { background: transparent; color: #8899a6; border: 1px solid #d0dce6; }
     .form-draft-banner__btn--discard:hover { background: #fef2f2; color: #e62e43; border-color: #e62e43; }
   `],
-  animations: [
-    trigger('slideDown', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(-8px)' }),
-        animate('250ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 1, transform: 'translateY(0)' }))
-      ]),
-      transition(':leave', [
-        animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 0, transform: 'translateY(-8px)' }))
-      ])
-    ])
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormDraftBannerComponent {
