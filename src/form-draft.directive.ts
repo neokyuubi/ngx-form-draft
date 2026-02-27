@@ -97,6 +97,11 @@ export class FormDraftDirective implements OnInit, AfterViewInit, OnDestroy {
     if (this.ngForm && this.formControl) {
       const draft = this.draftService.load(this.formId);
       
+      if (draft) {
+        // Set isRestoring BEFORE setTimeout to block any emissions
+        this.isRestoring = true;
+      }
+      
       setTimeout(() => {
         if (draft) {
           // Restore draft
