@@ -1,6 +1,6 @@
 {
   "name": "ngx-form-draft",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "Auto-save and restore Angular form drafts with zero dependencies",
   "author": "Neokyuubi",
   "publishConfig": {
@@ -15,9 +15,9 @@
   },
   "homepage": "https://github.com/neokyuubi/ngx-form-draft#readme",
   "peerDependencies": {
-    "@angular/core": ">=14.0.0",
-    "@angular/common": ">=14.0.0",
-    "@angular/forms": ">=14.0.0",
+    "@angular/core": ">=14.0.0 <21.0.0",
+    "@angular/common": ">=14.0.0 <21.0.0",
+    "@angular/forms": ">=14.0.0 <21.0.0",
     "rxjs": ">=6.0.0",
     "tslib": "^2.0.0"
   },

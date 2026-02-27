@@ -1,6 +1,6 @@
 # ngx-form-draft
 
-Zero-dependency Angular form draft auto-save and restore. Works with Angular 14+.
+Zero-dependency Angular form draft auto-save and restore. Works with Angular 14-20.
 
 ## Features
 
@@ -11,11 +11,14 @@ Zero-dependency Angular form draft auto-save and restore. Works with Angular 14+
 - Visual banner with discard option
 - 7-day draft expiration
 - Zero external dependencies
+- No Angular animations required (pure CSS)
 
 ## Requirements
 
-- Angular 14 or higher
+- Angular 14-20
 - TypeScript 4.7+
+
+> **Note:** Angular 21+ support is not yet tested. The package uses stable Angular APIs that should work, but may require updates for newer versions. Please report any issues.
 
 ## Installation
 
