@@ -55,6 +55,7 @@ export class FormDraftDirective implements OnInit, AfterViewInit, OnDestroy {
       this.initialValues = JSON.parse(JSON.stringify(this.formControl.value));
       console.log('[ngx-form-draft] Initial values (reactive):', this.initialValues);
     }
+    // For template forms, initial values will be captured in AfterViewInit
 
     const draft = this.draftService.load(this.formId);
     if (draft) {
@@ -93,11 +94,20 @@ export class FormDraftDirective implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     // For template-driven forms, capture initial values after view is initialized
+    // BUT before any draft restoration (if no draft was loaded)
     if (this.ngForm && this.formControl) {
-      setTimeout(() => {
-        this.initialValues = JSON.parse(JSON.stringify(this.formControl!.value));
-        console.log('[ngx-form-draft] Initial values (template):', this.initialValues);
-      }, 0);
+      const draft = this.draftService.load(this.formId);
+      if (!draft) {
+        // Only capture defaults if there's no draft to restore
+        setTimeout(() => {
+          this.initialValues = JSON.parse(JSON.stringify(this.formControl!.value));
+          console.log('[ngx-form-draft] Initial values (template, no draft):', this.initialValues);
+        }, 0);
+      } else {
+        // If draft was restored, use empty object as initial to allow any change to save
+        this.initialValues = {};
+        console.log('[ngx-form-draft] Initial values (template, with draft): {}');
+      }
     }
   }
 
