@@ -1,6 +1,6 @@
 {
   "name": "ngx-form-draft",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "description": "Auto-save and restore Angular form drafts with zero dependencies",
   "author": "Neokyuubi",
   "publishConfig": {

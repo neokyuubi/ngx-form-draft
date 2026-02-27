@@ -51,6 +51,7 @@ export class FormDraftDirective implements OnInit, OnDestroy {
     if (!this.formControl || !this.formId) return;
 
     this.initialValues = JSON.parse(JSON.stringify(this.formControl.value));
+    console.log('[ngx-form-draft] Initial values:', this.initialValues, 'Form type:', this.ngForm ? 'template' : 'reactive');
 
     const draft = this.draftService.load(this.formId);
     if (draft) {
@@ -69,6 +70,7 @@ export class FormDraftDirective implements OnInit, OnDestroy {
           if (this.ngForm && !hasUserInteraction) {
             const currentValues = this.formControl?.value || {};
             const isDifferent = JSON.stringify(currentValues) !== JSON.stringify(this.initialValues);
+            console.log('[ngx-form-draft] Template form check - Current:', currentValues, 'Initial:', this.initialValues, 'Different:', isDifferent);
             if (isDifferent) {
               hasUserInteraction = true;
               return true;
@@ -81,6 +83,7 @@ export class FormDraftDirective implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe((values) => {
+        console.log('[ngx-form-draft] Saving draft:', values);
         this.saveDraft(values);
       });
   }
