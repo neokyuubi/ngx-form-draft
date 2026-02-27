@@ -50,7 +50,12 @@ export class FormDraftDirective implements OnInit, OnDestroy {
     this.formControl = this.formGroupDir?.form || this.ngForm?.form || null;
     if (!this.formControl || !this.formId) return;
 
-    this.initialValues = JSON.parse(JSON.stringify(this.formControl.value));
+    // For template-driven forms, wait for form to be initialized
+    setTimeout(() => {
+      if (this.formControl) {
+        this.initialValues = JSON.parse(JSON.stringify(this.formControl.value));
+      }
+    }, 0);
 
     const draft = this.draftService.load(this.formId);
     if (draft) {
