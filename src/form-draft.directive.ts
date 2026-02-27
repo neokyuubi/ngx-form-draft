@@ -58,13 +58,25 @@ export class FormDraftDirective implements OnInit, OnDestroy {
       this.showBanner(draft.savedAt, true);
     }
 
-    // For template-driven forms, skip initial empty emissions
-    const skipFirst = this.ngForm ? 1 : 0;
+    // For template-driven forms, wait until form is actually used
+    let hasUserInteraction = false;
     
     this.formControl.valueChanges
       .pipe(
-        skip(skipFirst),
-        filter(() => !this.isRestoring),
+        filter(() => {
+          if (this.isRestoring) return false;
+          // For template forms, only save after first real user interaction
+          if (this.ngForm && !hasUserInteraction) {
+            const currentValues = this.formControl?.value || {};
+            const isDifferent = JSON.stringify(currentValues) !== JSON.stringify(this.initialValues);
+            if (isDifferent) {
+              hasUserInteraction = true;
+              return true;
+            }
+            return false;
+          }
+          return true;
+        }),
         debounceTime(this.draftDebounce),
         takeUntil(this.destroy$)
       )
