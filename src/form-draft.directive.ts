@@ -50,18 +50,18 @@ export class FormDraftDirective implements OnInit, AfterViewInit, OnDestroy {
     this.formControl = this.formGroupDir?.form || this.ngForm?.form || null;
     if (!this.formControl || !this.formId) return;
 
-    // For reactive forms, capture initial values immediately
+    // For reactive forms, capture initial values and restore draft immediately
     if (this.formGroupDir) {
       this.initialValues = JSON.parse(JSON.stringify(this.formControl.value));
       console.log('[ngx-form-draft] Initial values (reactive):', this.initialValues);
+      
+      const draft = this.draftService.load(this.formId);
+      if (draft) {
+        this.restoreDraft(draft.values);
+        this.showBanner(draft.savedAt, true);
+      }
     }
-    // For template forms, initial values will be captured in AfterViewInit
-
-    const draft = this.draftService.load(this.formId);
-    if (draft) {
-      this.restoreDraft(draft.values);
-      this.showBanner(draft.savedAt, true);
-    }
+    // For template forms, restoration happens in AfterViewInit
 
     // For template-driven forms, wait until form is actually used
     let hasUserInteraction = false;
@@ -93,21 +93,25 @@ export class FormDraftDirective implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    // For template-driven forms, capture initial values after view is initialized
-    // BUT before any draft restoration (if no draft was loaded)
+    // For template-driven forms, restore draft and capture initial values after view is initialized
     if (this.ngForm && this.formControl) {
       const draft = this.draftService.load(this.formId);
-      if (!draft) {
-        // Only capture defaults if there's no draft to restore
-        setTimeout(() => {
+      
+      setTimeout(() => {
+        if (draft) {
+          // Restore draft
+          console.log('[ngx-form-draft] Restoring template draft:', draft.values);
+          this.restoreDraft(draft.values);
+          this.showBanner(draft.savedAt, true);
+          // Set initial to empty so any change will save
+          this.initialValues = {};
+          console.log('[ngx-form-draft] Initial values (template, with draft): {}');
+        } else {
+          // No draft, capture defaults as initial
           this.initialValues = JSON.parse(JSON.stringify(this.formControl!.value));
           console.log('[ngx-form-draft] Initial values (template, no draft):', this.initialValues);
-        }, 0);
-      } else {
-        // If draft was restored, use empty object as initial to allow any change to save
-        this.initialValues = {};
-        console.log('[ngx-form-draft] Initial values (template, with draft): {}');
-      }
+        }
+      }, 0);
     }
   }
 
