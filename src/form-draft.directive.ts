@@ -50,12 +50,7 @@ export class FormDraftDirective implements OnInit, OnDestroy {
     this.formControl = this.formGroupDir?.form || this.ngForm?.form || null;
     if (!this.formControl || !this.formId) return;
 
-    // For template-driven forms, wait for form to be initialized
-    setTimeout(() => {
-      if (this.formControl) {
-        this.initialValues = JSON.parse(JSON.stringify(this.formControl.value));
-      }
-    }, 0);
+    this.initialValues = JSON.parse(JSON.stringify(this.formControl.value));
 
     const draft = this.draftService.load(this.formId);
     if (draft) {
@@ -80,7 +75,13 @@ export class FormDraftDirective implements OnInit, OnDestroy {
   private saveDraft(values: Record<string, any>): void {
     const filtered = this.filterFields(values);
     
-    if (this.isAllEmpty(filtered) || this.matchesInitialValues(filtered)) {
+    if (this.isAllEmpty(filtered)) {
+      return;
+    }
+
+    // Only check initial values if they're not empty (reactive forms have proper initial values)
+    const initialIsEmpty = this.isAllEmpty(this.initialValues);
+    if (!initialIsEmpty && this.matchesInitialValues(filtered)) {
       return;
     }
 
