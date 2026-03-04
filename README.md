@@ -26,6 +26,26 @@ Zero-dependency Angular form draft auto-save and restore. Works with Angular 14-
 npm install ngx-form-draft
 ```
 
+## Demo
+
+A live demo is hosted on GitHub Pages and includes two full forms (reactive and template-driven) with all common input types and draft auto-save/restore:
+
+- **Live demo:** https://neokyuubi.github.io/ngx-form-draft/
+
+After the first release, enable it under **Settings → Pages** by setting the source to **GitHub Actions**.
+
+To run the demo locally (requires a published version of `ngx-form-draft` on npm):
+
+```bash
+# From repo root: build the library first if you need to test unreleased changes
+npm run build
+
+# Then run the demo app (uses ngx-form-draft from npm)
+cd demo && npm install && npm start
+```
+
+Open http://localhost:4200 and use the nav to try the Reactive Form and Template Form pages.
+
 ## Setup
 
 ### 1. Import the module

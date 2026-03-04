@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="card">
+    <h1>Reactive Form Demo</h1>
+    <p>This form uses <code>[formGroup]</code> and <code>ngxFormDraft</code> with <code>[draftDebounce]="500"</code> and <code>[draftShowOnChange]="true"</code>.</p>
+
+    <form
+      [formGroup]="myForm"
+      [ngxFormDraft]="'reactive_demo'"
+      [draftDebounce]="500"
+      [draftShowOnChange]="true"
+      (ngSubmit)="onSubmit()"
+    >
+      <h2>Basic fields</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="rf-name">Full name</label>
+          <input id="rf-name" type="text" formControlName="fullName" />
+        </div>
+        <div class="form-group">
+          <label for="rf-age">Age</label>
+          <input id="rf-age" type="number" formControlName="age" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="rf-email">Email</label>
+        <input id="rf-email" type="email" formControlName="email" />
+      </div>
+      <div class="form-group">
+        <label for="rf-bio">Bio (textarea)</label>
+        <textarea id="rf-bio" formControlName="bio"></textarea>
+      </div>
+
+      <h2>Select & multi-select</h2>
+      <div class="form-group">
+        <label for="rf-country">Country (select)</label>
+        <select id="rf-country" formControlName="country">
+          <option *ngFor="let c of countries" [value]="c.value">{{ c.label }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="rf-tags">Tags (multi-select)</label>
+        <select id="rf-tags" formControlName="tags" multiple>
+          <option value="angular">Angular</option>
+          <option value="react">React</option>
+          <option value="vue">Vue</option>
+          <option value="svelte">Svelte</option>
+        </select>
+      </div>
+
+      <h2>Checkbox & radio</h2>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" formControlName="newsletter" />
+          Subscribe to newsletter
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Gender (radio)</label>
+        <div>
+          <label><input type="radio" formControlName="gender" value="male" /> Male</label>
+          <label><input type="radio" formControlName="gender" value="female" /> Female</label>
+          <label><input type="radio" formControlName="gender" value="other" /> Other</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="rf-date">Birth date</label>
+        <input id="rf-date" type="date" formControlName="birthDate" />
+      </div>
+
+      <h2>Dynamic list (FormArray)</h2>
+      <div formArrayName="items">
+        <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="card" style="margin-bottom: 1rem;">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Item name</label>
+              <input type="text" formControlName="name" />
+            </div>
+            <div class="form-group">
+              <label>Quantity</label>
+              <input type="number" formControlName="quantity" />
+            </div>
+            <div class="form-group">
+              <label>Notes</label>
+              <input type="text" formControlName="notes" />
+            </div>
+            <div class="form-group">
+              <label>&nbsp;</label>
+              <button type="button" (click)="removeItem(i)">Remove</button>
+            </div>
+          </div>
+        </div>
+        <button type="button" (click)="addItem()">Add item</button>
+      </div>
+
+      <div class="form-group" style="margin-top: 1rem;">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

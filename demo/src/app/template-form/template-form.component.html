@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="card">
+    <h1>Template-driven Form Demo</h1>
+    <p>This form uses <code>ngForm</code> and <code>ngxFormDraft</code> with <code>[draftDebounce]="500"</code> and <code>[draftShowOnChange]="true"</code>.</p>
+
+    <form
+      #f="ngForm"
+      [ngxFormDraft]="'template_demo'"
+      [draftDebounce]="500"
+      [draftShowOnChange]="true"
+      (ngSubmit)="onSubmit()"
+    >
+      <h2>Basic fields</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="tf-name">Full name</label>
+          <input id="tf-name" type="text" name="fullName" [(ngModel)]="model.fullName" />
+        </div>
+        <div class="form-group">
+          <label for="tf-age">Age</label>
+          <input id="tf-age" type="number" name="age" [(ngModel)]="model.age" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="tf-email">Email</label>
+        <input id="tf-email" type="email" name="email" [(ngModel)]="model.email" />
+      </div>
+      <div class="form-group">
+        <label for="tf-bio">Bio (textarea)</label>
+        <textarea id="tf-bio" name="bio" [(ngModel)]="model.bio"></textarea>
+      </div>
+
+      <h2>Select & multi-select</h2>
+      <div class="form-group">
+        <label for="tf-country">Country (select)</label>
+        <select id="tf-country" name="country" [(ngModel)]="model.country">
+          <option *ngFor="let c of countries" [value]="c.value">{{ c.label }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="tf-tags">Tags (multi-select)</label>
+        <select id="tf-tags" name="tags" [(ngModel)]="model.tags" multiple>
+          <option value="angular">Angular</option>
+          <option value="react">React</option>
+          <option value="vue">Vue</option>
+          <option value="svelte">Svelte</option>
+        </select>
+      </div>
+
+      <h2>Checkbox & radio</h2>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" name="newsletter" [(ngModel)]="model.newsletter" />
+          Subscribe to newsletter
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Gender (radio)</label>
+        <div>
+          <label><input type="radio" name="gender" value="male" [(ngModel)]="model.gender" /> Male</label>
+          <label><input type="radio" name="gender" value="female" [(ngModel)]="model.gender" /> Female</label>
+          <label><input type="radio" name="gender" value="other" [(ngModel)]="model.gender" /> Other</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="tf-date">Birth date</label>
+        <input id="tf-date" type="date" name="birthDate" [(ngModel)]="model.birthDate" />
+      </div>
+
+      <div class="form-group" style="margin-top: 1rem;">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
