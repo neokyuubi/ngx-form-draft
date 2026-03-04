@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormDraftService } from 'ngx-form-draft';
 
 @Component({
   selector: 'app-template-form',
@@ -14,6 +15,8 @@ export class TemplateFormComponent {
     { value: 'fr', label: 'France' },
   ];
 
+  constructor(private draftService: FormDraftService) {}
+
   model = {
     fullName: '',
     age: null as number | null,
@@ -28,6 +31,7 @@ export class TemplateFormComponent {
 
   onSubmit(): void {
     console.log('Template form submitted', this.model);
-    alert('Form submitted! Check console.');
+    this.draftService.clear('template_demo');
+    alert('Form submitted! Draft cleared.');
   }
 }

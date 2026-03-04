@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormDraftService } from 'ngx-form-draft';
 
 @Component({
   selector: 'app-reactive-form',
@@ -17,7 +18,10 @@ export class ReactiveFormComponent implements OnInit {
     { value: 'fr', label: 'France' },
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private draftService: FormDraftService,
+  ) {}
 
   ngOnInit(): void {
     this.myForm = this.fb.group({
@@ -58,6 +62,7 @@ export class ReactiveFormComponent implements OnInit {
 
   onSubmit(): void {
     console.log('Reactive form submitted', this.myForm.value);
-    alert('Form submitted! Check console.');
+    this.draftService.clear('reactive_demo');
+    alert('Form submitted! Draft cleared.');
   }
 }

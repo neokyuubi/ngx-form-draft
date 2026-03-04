@@ -1,6 +1,6 @@
 {
   "name": "ngx-form-draft",
-  "version": "2.2.7",
+  "version": "2.2.8",
   "description": "Auto-save and restore Angular form drafts with zero dependencies",
   "author": "Neokyuubi",
   "publishConfig": {
@@ -38,7 +38,8 @@
   },
   "scripts": {
     "build": "ng-packagr -p ng-package.json",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "release": "node scripts/release.js"
   },
   "keywords": [
     "angular",
