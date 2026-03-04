@@ -116,6 +116,29 @@ export class AppModule {}
 - `draftSavedLabel` (string): Label before timestamp
 - `draftDiscardText` (string): Discard button text
 
+## Clearing the draft
+
+The draft is not cleared automatically on form submit. To clear it (e.g. after a successful submit), use **FormDraftService** — the same for both reactive and template-driven forms.
+
+Inject the service and call `clear(formId)` with the same `formId` you use on the form:
+
+```typescript
+import { FormDraftService } from 'ngx-form-draft';
+
+export class MyComponent {
+  constructor(private draftService: FormDraftService) {}
+
+  onSubmit() {
+    this.myForm.markAllAsTouched();
+    if (this.myForm.invalid) return;
+    // ... submit to API ...
+    this.draftService.clear('uniqueFormId');  // same id as ngxFormDraft
+  }
+}
+```
+
+Users can also clear the draft at any time via the banner’s **Discard** button.
+
 ## Internationalization (i18n)
 
 The package has **zero dependencies** and supports any i18n solution. Just pass translated strings via inputs:
