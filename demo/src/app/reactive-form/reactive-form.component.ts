@@ -62,7 +62,7 @@ export class ReactiveFormComponent implements OnInit {
 
   onSubmit(): void {
     console.log('Reactive form submitted', this.myForm.value);
-    this.draftService.clear('reactive_demo');
+    this.draftService.clearAndReset('reactive_demo');
     alert('Form submitted! Draft cleared.');
   }
 }

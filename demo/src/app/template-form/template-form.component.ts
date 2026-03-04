@@ -31,7 +31,7 @@ export class TemplateFormComponent {
 
   onSubmit(): void {
     console.log('Template form submitted', this.model);
-    this.draftService.clear('template_demo');
+    this.draftService.clearAndReset('template_demo');
     alert('Form submitted! Draft cleared.');
   }
 }

@@ -50,6 +50,8 @@ export class FormDraftDirective implements OnInit, AfterViewInit, OnDestroy {
     this.formControl = this.formGroupDir?.form || this.ngForm?.form || null;
     if (!this.formControl || !this.formId) return;
 
+    this.draftService.registerReset(this.formId, () => this.performResetAndDestroyBanner());
+
     // For reactive forms, capture initial values and restore draft immediately
     if (this.formGroupDir) {
       this.initialValues = JSON.parse(JSON.stringify(this.formControl.value));
@@ -107,6 +109,7 @@ export class FormDraftDirective implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.draftService.unregisterReset(this.formId);
     this.destroy$.next();
     this.destroy$.complete();
     this.destroyBanner();
@@ -216,7 +219,14 @@ export class FormDraftDirective implements OnInit, AfterViewInit, OnDestroy {
 
   private discardDraft(): void {
     this.draftService.clear(this.formId);
+    this.performResetAndDestroyBanner();
+  }
 
+  /**
+   * Resets the form to initial values and destroys the draft banner.
+   * Used by the service when clearAndReset(formId) is called (e.g. on submit).
+   */
+  public performResetAndDestroyBanner(): void {
     if (this.formControl) {
       this.isRestoring = true;
       const form = this.formGroupDir?.form || this.ngForm?.form;
@@ -228,7 +238,6 @@ export class FormDraftDirective implements OnInit, AfterViewInit, OnDestroy {
         this.isRestoring = false;
       }, this.draftDebounce + 200);
     }
-
     this.destroyBanner();
   }
 
