@@ -1,21 +1,15 @@
 #!/bin/bash
 set -e
 
-# Ensure we're logged in to npm (required for publish)
-if ! npm whoami &>/dev/null; then
-  echo ""
-  echo "❌ Not logged in to npm. Run once:"
-  echo "   npm login"
-  echo ""
-  echo "Then run ./publish.sh again."
-  exit 1
-fi
+# Prepares a release and creates the GitHub release (tag).
+# CI/CD then runs: build + publish to npm + build demo + deploy Pages.
+# Do NOT run npm build or npm publish here — the workflow does that.
 
-# Bump version if current is already published on npm
 current=$(node -p "require('./package.json').version")
-published=$(npm view ngx-form-draft version 2>/dev/null) || published=""
-if [ -n "$published" ] && [ "$current" = "$published" ]; then
-  echo "Version $current already published on npm. Bumping patch..."
+
+# If this version is already released (tag exists), bump patch
+if git rev-parse "v${current}" &>/dev/null; then
+  echo "Tag v${current} already exists. Bumping patch..."
   npm version patch --no-git-tag-version
   newVersion=$(node -p "require('./package.json').version")
   echo "Bumped to $newVersion"
@@ -31,17 +25,19 @@ if [ -n "$published" ] && [ "$current" = "$published" ]; then
     "
     echo "Updated demo/package.json to $newVersion"
   fi
-  # Push version bump before publishing to npm
-  git add package.json
-  [ -f demo/package.json ] && git add demo/package.json
-  git commit -m "chore: release v${newVersion}"
-  git push
-  echo "Pushed v${newVersion} to origin."
+  version=$newVersion
+else
+  version=$current
 fi
 
-# Build the package
-npm run build
+# Commit and push version (so CI has the right package.json)
+git add package.json
+[ -f demo/package.json ] && git add demo/package.json
+if ! git diff --staged --quiet 2>/dev/null; then
+  git commit -m "chore: release v${version}"
+  git push
+fi
 
-# Publish from dist folder
-cd dist
-npm publish
+# Create GitHub release → triggers CI: build, npm publish, demo deploy
+gh release create "v${version}" --title "v${version}" --notes "v${version}"
+echo "Release v${version} created. CI will build and publish to npm."
