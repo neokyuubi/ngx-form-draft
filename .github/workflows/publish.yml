@@ -22,8 +22,14 @@ jobs:
       
       - run: npm run build
       
-      - run: npm publish --provenance --access public
-        working-directory: ./dist
+      - name: Publish to npm (skip if version already published)
+        run: |
+          VERSION=$(node -p "require('./dist/package.json').version")
+          if npm view "ngx-form-draft@${VERSION}" version 2>/dev/null; then
+            echo "ngx-form-draft@${VERSION} already published, skipping."
+          else
+            cd dist && npm publish --provenance --access public
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
