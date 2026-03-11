@@ -31,6 +31,12 @@ if [ -n "$published" ] && [ "$current" = "$published" ]; then
     "
     echo "Updated demo/package.json to $newVersion"
   fi
+  # Push version bump before publishing to npm
+  git add package.json
+  [ -f demo/package.json ] && git add demo/package.json
+  git commit -m "chore: release v${newVersion}"
+  git push
+  echo "Pushed v${newVersion} to origin."
 fi
 
 # Build the package
