@@ -31,8 +31,11 @@ else
 fi
 
 # Commit and push version (so CI has the right package.json)
+# Include lock files so nothing is left uncommitted
 git add package.json
 [ -f demo/package.json ] && git add demo/package.json
+[ -f package-lock.json ] && git add package-lock.json
+[ -f demo/package-lock.json ] && git add demo/package-lock.json
 if ! git diff --staged --quiet 2>/dev/null; then
   git commit -m "chore: release v${version}"
   git push
