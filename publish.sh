@@ -42,5 +42,9 @@ if ! git diff --staged --quiet 2>/dev/null; then
 fi
 
 # Create GitHub release → triggers CI: build, npm publish, demo deploy
-gh release create "v${version}" --title "v${version}" --notes "v${version}"
-echo "Release v${version} created. CI will build and publish to npm."
+if gh release view "v${version}" &>/dev/null; then
+  echo "Release v${version} already exists on GitHub. Nothing to do."
+else
+  gh release create "v${version}" --title "v${version}" --notes "v${version}"
+  echo "Release v${version} created. CI will build and publish to npm."
+fi
