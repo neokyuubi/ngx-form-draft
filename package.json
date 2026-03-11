@@ -37,7 +37,7 @@
     "zone.js": "~0.11.4"
   },
   "scripts": {
-    "build": "ng-packagr -p ng-package.json",
+    "build": "npx ng-packagr -p ng-package.json",
     "prepublishOnly": "npm run build",
     "release": "node scripts/release.js"
   },
