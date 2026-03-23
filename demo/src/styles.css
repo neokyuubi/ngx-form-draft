@@ -1,4 +1,4 @@
-/* ── Design tokens ── */
+/* Design tokens */
 :root {
   --bg: #f0f2f5;
   --card-bg: #ffffff;
@@ -13,7 +13,6 @@
   --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
 }
 
-/* ── Base ── */
 *, *::before, *::after { box-sizing: border-box; }
 body {
   margin: 0;
@@ -24,7 +23,7 @@ body {
   line-height: 1.5;
 }
 
-/* ── Nav ── */
+/* Nav */
 nav {
   background: #fff;
   padding: 0 1.5rem;
@@ -49,14 +48,13 @@ nav a {
 nav a:hover { background: #f3f4f6; color: var(--text); }
 nav a.active { background: #eff6ff; color: var(--primary); }
 
-/* ── Layout ── */
+/* Layout */
 .container {
   max-width: 760px;
   margin: 2.5rem auto;
   padding: 0 1rem;
 }
 
-/* ── Cards ── */
 .card, .form-card {
   background: var(--card-bg);
   border-radius: var(--radius);
@@ -65,12 +63,10 @@ nav a.active { background: #eff6ff; color: var(--primary); }
   margin-bottom: 1.5rem;
 }
 
-/* ── Form header ── */
 .form-header { margin-bottom: 1.75rem; }
 .form-header h1 { margin: 0 0 0.4rem; font-size: 1.5rem; }
 .form-header p { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
 
-/* ── Fieldset ── */
 fieldset {
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -86,7 +82,6 @@ legend {
   padding: 0 0.5rem;
 }
 
-/* ── Fields ── */
 .form-row {
   display: flex;
   gap: 1rem;
@@ -145,7 +140,6 @@ select:not([multiple]) {
   padding-right: 2rem;
 }
 
-/* ── Radio ── */
 .radio-group {
   display: flex;
   gap: 1rem;
@@ -168,7 +162,6 @@ select:not([multiple]) {
   flex-shrink: 0;
 }
 
-/* ── Checkbox ── */
 .checkbox-label {
   display: flex;
   align-items: center;
@@ -186,7 +179,6 @@ select:not([multiple]) {
   flex-shrink: 0;
 }
 
-/* ── FormArray items ── */
 .array-item {
   background: #f9fafb;
   border: 1px solid var(--border);
@@ -197,7 +189,6 @@ select:not([multiple]) {
 .array-item .form-row { margin-bottom: 0.5rem; }
 .array-item .field { margin-bottom: 0; }
 
-/* ── Buttons ── */
 .btn-submit {
   background: var(--primary);
   color: #fff;
@@ -243,8 +234,21 @@ select:not([multiple]) {
   padding-top: 0.5rem;
 }
 
-/* ── Home page ── */
+/* Home page */
 .tagline { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 1rem; }
+.title-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem; }
+.title-row h1 { margin: 0; }
+.version-badge {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 20px;
+  padding: 0.15rem 0.6rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
 .feature-list { padding-left: 1.25rem; line-height: 2; }
 .install-block {
   background: #f0f4ff;

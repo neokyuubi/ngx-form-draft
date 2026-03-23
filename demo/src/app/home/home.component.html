@@ -5,22 +5,22 @@
 
     <p>
       <strong>ngx-form-draft</strong> automatically saves your Angular form values to
-      <code>localStorage</code> as the user types, and restores them on page reload — so users
-      never lose their work. It works with both <strong>Reactive Forms</strong> (<code>FormGroup</code>,
+      <code>localStorage</code> as the user types and restores them on page reload, so users
+      never lose their work. It supports both <strong>Reactive Forms</strong> (<code>FormGroup</code>,
       <code>FormArray</code>) and <strong>Template-driven Forms</strong> (<code>ngForm</code>),
-      with zero external dependencies and no Angular animations required.
+      with no external dependencies and no Angular animations module required.
     </p>
 
     <ul class="feature-list">
       <li>Auto-saves form values to <code>localStorage</code> with configurable debounce</li>
-      <li>Restores drafts automatically on page reload or navigation</li>
+      <li>Restores drafts on page reload or navigation</li>
       <li>Works with Reactive Forms and Template-driven Forms</li>
       <li>Handles nested <code>FormGroup</code> and <code>FormArray</code></li>
-      <li>Visual banner with discard option — pure CSS, no animations module needed</li>
+      <li>Visual banner with discard option, pure CSS with no animations module needed</li>
       <li>7-day draft expiration built-in</li>
-      <li>Exclude sensitive fields (e.g. passwords) from being saved</li>
-      <li>Fully customizable banner text for i18n support</li>
-      <li>Compatible with Angular 14, 15, 16, 17, 18, 19, and 20</li>
+      <li>Exclude sensitive fields like passwords from being saved</li>
+      <li>Customizable banner text for i18n support</li>
+      <li>Compatible with Angular 14, 15, 16, 17, 18, 19 and 20</li>
     </ul>
 
     <div class="install-block">
@@ -40,15 +40,15 @@
     <h2>Live Examples</h2>
     <ul>
       <li>
-        <a routerLink="/reactive">Reactive Form demo</a> — <code>FormGroup</code> + <code>FormArray</code> with all common input types
+        <a routerLink="/reactive">Reactive Form demo</a> - <code>FormGroup</code> + <code>FormArray</code> with all common input types
       </li>
       <li>
-        <a routerLink="/template">Template-driven Form demo</a> — <code>ngForm</code> with the same variety of inputs
+        <a routerLink="/template">Template-driven Form demo</a> - <code>ngForm</code> with the same variety of inputs
       </li>
     </ul>
     <p>
       Both demos use <code>[draftDebounce]="500"</code> and <code>[draftShowOnChange]="true"</code>.
-      Fill in a form, then refresh the page or navigate away and come back — your draft will be restored automatically.
+      Fill in a form, refresh the page or navigate away and come back to see the draft restored.
     </p>
   </div>
 </div>
