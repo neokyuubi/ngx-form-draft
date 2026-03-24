@@ -2,7 +2,7 @@
   <div class="form-card">
     <div class="form-header">
       <h1>Template-driven Form Demo</h1>
-      <p>Uses <code>ngForm</code> + <code>ngxFormDraft</code>. Fill in the form, refresh the page — your draft will be restored.</p>
+      <p>Uses <code>ngForm</code> + <code>ngxFormDraft</code>. Fill in the form, refresh the page - your draft will be restored.</p>
     </div>
 
     <form #f="ngForm" [ngxFormDraft]="'template_demo'" [draftDebounce]="500" [draftShowOnChange]="true" (ngSubmit)="onSubmit()">
@@ -12,7 +12,7 @@
         <div class="form-row">
           <div class="field">
             <label for="tf-name">Full name</label>
-            <input id="tf-name" type="text" name="fullName" [(ngModel)]="model.fullName" placeholder="Jane Doe" />
+            <input id="tf-name" type="text" name="fullName" [(ngModel)]="model.fullName" placeholder="John Smith" />
           </div>
           <div class="field">
             <label for="tf-age">Age</label>
@@ -21,7 +21,7 @@
         </div>
         <div class="field">
           <label for="tf-email">Email</label>
-          <input id="tf-email" type="email" name="email" [(ngModel)]="model.email" placeholder="jane@example.com" />
+          <input id="tf-email" type="email" name="email" [(ngModel)]="model.email" placeholder="john@example.com" />
         </div>
         <div class="field">
           <label for="tf-bio">Bio</label>

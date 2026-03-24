@@ -18,7 +18,7 @@ Zero-dependency Angular form draft auto-save and restore. Works with Angular 14-
 - Angular 14-20
 - TypeScript 4.7+
 
-> **Note:** Angular 21+ support is not yet tested. The package uses stable Angular APIs that should work, but may require updates for newer versions. Please report any issues.
+> Angular 21+ hasn't been tested yet. It uses stable APIs so it'll probably work, but open an issue if you run into anything.
 
 ## Installation
 
@@ -118,7 +118,7 @@ export class AppModule {}
 
 ## Clearing the draft
 
-The draft is not cleared automatically on form submit. To clear it (e.g. after a successful submit), use **FormDraftService** — the same for both reactive and template-driven forms.
+The draft is not cleared automatically on form submit. To clear it (e.g. after a successful submit), use **FormDraftService** - it works the same for both reactive and template-driven forms.
 
 Inject the service and call `clear(formId)` with the same `formId` you use on the form:
 

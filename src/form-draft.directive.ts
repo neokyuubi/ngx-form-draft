@@ -10,12 +10,6 @@ import { FormDraftBannerComponent } from './form-draft-banner.component';
 
 /**
  * Auto-saves and restores form drafts
- * 
- * @example
- * <form [formGroup]="myForm" ngxFormDraft="myFormId">
- * 
- * @example
- * <form [formGroup]="myForm" [ngxFormDraft]="'edit_' + entityId" [draftExcludeFields]="['password']">
  */
 @Directive({
   selector: '[ngxFormDraft]',
@@ -224,7 +218,6 @@ export class FormDraftDirective implements OnInit, AfterViewInit, OnDestroy {
 
   /**
    * Resets the form to initial values and destroys the draft banner.
-   * Used by the service when clearAndReset(formId) is called (e.g. on submit).
    */
   public performResetAndDestroyBanner(): void {
     if (this.formControl) {

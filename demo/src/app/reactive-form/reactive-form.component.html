@@ -2,7 +2,7 @@
   <div class="form-card">
     <div class="form-header">
       <h1>Reactive Form Demo</h1>
-      <p>Uses <code>[formGroup]</code> + <code>ngxFormDraft</code>. Fill in the form, refresh the page — your draft will be restored.</p>
+      <p>Uses <code>[formGroup]</code> + <code>ngxFormDraft</code>. Fill in the form, refresh the page - your draft will be restored.</p>
     </div>
 
     <form [formGroup]="myForm" [ngxFormDraft]="'reactive_demo'" [draftDebounce]="500" [draftShowOnChange]="true" (ngSubmit)="onSubmit()">
@@ -12,7 +12,7 @@
         <div class="form-row">
           <div class="field">
             <label for="rf-name">Full name</label>
-            <input id="rf-name" type="text" formControlName="fullName" placeholder="Jane Doe" />
+            <input id="rf-name" type="text" formControlName="fullName" placeholder="John Smith" />
           </div>
           <div class="field">
             <label for="rf-age">Age</label>
@@ -21,7 +21,7 @@
         </div>
         <div class="field">
           <label for="rf-email">Email</label>
-          <input id="rf-email" type="email" formControlName="email" placeholder="jane@example.com" />
+          <input id="rf-email" type="email" formControlName="email" placeholder="john@example.com" />
         </div>
         <div class="field">
           <label for="rf-bio">Bio</label>

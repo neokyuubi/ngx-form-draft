@@ -3,7 +3,7 @@ set -e
 
 # Prepares a release and creates the GitHub release (tag).
 # CI/CD then runs: build + publish to npm + build demo + deploy Pages.
-# Do NOT run npm build or npm publish here — the workflow does that.
+# Don't run npm build or npm publish here - the workflow handles that.
 
 current=$(node -p "require('./package.json').version")
 
